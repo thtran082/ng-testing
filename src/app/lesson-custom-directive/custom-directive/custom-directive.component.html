@@ -1,0 +1,14 @@
+<div class="container flex flex-col rounded-lg border border-gray-200">
+  <h1 class="text-xl font-bold border-b p-4 border-gray-200 bg-slate-300">Card title</h1>
+  <div class="p-4">
+    <div *hideAfter="3000; note note; counter as counter">
+      This content will be hidden after {{counter}} seconds.
+    </div>
+  </div>
+</div>
+
+<ng-template #note>
+  <em class="text-slate-500 text-sm">
+    A note was shown right after the body was disappeared.
+  </em>
+</ng-template>

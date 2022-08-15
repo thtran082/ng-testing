@@ -1,1 +1,25 @@
 /* You can add global styles to this file, and also import other style files */
+p {
+  border: 1px solid #98f2f5;
+  border-radius: 10px;
+  background-color: #d1f2f3;
+
+  text-align: center;
+  width: 200px;
+  margin-inline: auto;
+  
+  &.highlight {
+    // background: #bada55;
+    animation: blink 1s;
+  }
+}
+
+@keyframes blink {
+  from {
+    background-color: #d1f2f3;
+  }
+  to {
+    background-color: #bada55;
+  }
+}
+
