@@ -23,7 +23,7 @@ const routes: Routes = [
         component: AdminComponent,
         canDeactivate: [FormGuardGuard],
         data: {
-          guard: 'are you want to leave? Your data will be lost!'
+          guard: 'Consider to save your data before leaving the page'
         }
       },
     ]

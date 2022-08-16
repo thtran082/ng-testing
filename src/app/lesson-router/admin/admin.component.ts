@@ -2,6 +2,7 @@ import { Component, OnInit, ViewContainerRef } from "@angular/core";
 import { AuthService } from "../auth/auth.service";
 import { FormBuilder, Validators } from "@angular/forms";
 import { ActivatedRoute } from "@angular/router";
+import { FormSafeData } from "../guard/form-safe-data";
 
 @Component({
   selector: "app-admin",
@@ -30,23 +31,26 @@ import { ActivatedRoute } from "@angular/router";
   `,
   styleUrls: ["./admin.component.scss"]
 })
-export class AdminComponent implements OnInit {
+export class AdminComponent implements OnInit, FormSafeData {
 
   readonly form = this._fb.group({
     firstName: ["", [Validators.required]],
     lastName: ["", Validators.required]
   });
 
-  constructor(private authService: AuthService, private _fb: FormBuilder, public route: ActivatedRoute) {
+  constructor(private authService: AuthService, private _fb: FormBuilder, private route: ActivatedRoute) {
   }
 
   ngOnInit(): void {
-    this.route.data.subscribe(data => {
-      console.log(data);
-    });
   }
 
   submit() {
     console.log(this.form.get('firstName')?.hasError('required'));
+  }
+
+  readonly routerData$ = this.route.data;
+
+  get isDataSaved(): boolean {
+    return !this.form.dirty;
   }
 }
