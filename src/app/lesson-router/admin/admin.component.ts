@@ -1,17 +1,19 @@
-import { Component, OnInit, ViewContainerRef } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { AuthService } from "../auth/auth.service";
-import { FormBuilder, Validators } from "@angular/forms";
+import { AbstractControl, FormBuilder, ValidationErrors, ValidatorFn, Validators } from "@angular/forms";
 import { ActivatedRoute } from "@angular/router";
 import { FormSafeData } from "../guard/form-safe-data";
+import { ApiService } from "@ng-testing/services";
+import { map, Observable, switchMap, timer } from "rxjs";
 
 @Component({
   selector: "app-admin",
   template: `
     <div class="container">
-      <form nz-form [formGroup]="form" [nzLayout]="'inline'" (ngSubmit)="submit()">
+        <form nz-form [formGroup]="form" [nzLayout]="'inline'" (submit)="submit()">
         <nz-form-item>
           <nz-form-label nzRequired nzFor="firstName">first name</nz-form-label>
-          <nz-form-control  [nzSpan]="12" nzHasFeedback nzValidatingTip="Validating..." [nzErrorTip]="firstNameError">
+          <nz-form-control [nzSpan]="12" nzHasFeedback nzValidatingTip="Validating..." [nzErrorTip]="firstNameError">
             <input nz-input formControlName="firstName" id="firstName" placeholder="first name"/>
           </nz-form-control>
         </nz-form-item>
@@ -26,7 +28,8 @@ import { FormSafeData } from "../guard/form-safe-data";
     </div>
 
     <ng-template #firstNameError let-control>
-      <ng-container>Please input your first name!</ng-container>
+      <ng-container *ngIf="control.hasError('required')">Please input your first name!</ng-container>
+      <ng-container *ngIf="control.hasError('duplicateUser')"> first name has been existed.</ng-container>
     </ng-template>
   `,
   styleUrls: ["./admin.component.scss"]
@@ -34,18 +37,24 @@ import { FormSafeData } from "../guard/form-safe-data";
 export class AdminComponent implements OnInit, FormSafeData {
 
   readonly form = this._fb.group({
-    firstName: ["", [Validators.required]],
+    firstName: ["", Validators.compose([Validators.required]), validateUserNameFromApi(this.api)],
     lastName: ["", Validators.required]
   });
 
-  constructor(private authService: AuthService, private _fb: FormBuilder, private route: ActivatedRoute) {
+  constructor(
+    private authService: AuthService,
+    private _fb: FormBuilder,
+    private route: ActivatedRoute,
+    private api: ApiService
+  ) {
   }
 
   ngOnInit(): void {
   }
 
   submit() {
-    console.log(this.form.get('firstName')?.hasError('required'));
+   throw new Error('something')
+    console.log(this.form.get("firstName")?.hasError("required"));
   }
 
   readonly routerData$ = this.route.data;
@@ -53,4 +62,17 @@ export class AdminComponent implements OnInit, FormSafeData {
   get isDataSaved(): boolean {
     return !this.form.dirty;
   }
+}
+
+const validateUserNameFromApi = (api: ApiService): ValidatorFn => {
+  return (control: AbstractControl): Observable<ValidationErrors | null> => {
+    return timer(300).pipe(
+      switchMap(() =>
+        api.getUsers().pipe(
+          map(users => users.find(user => user.username === control.value)),
+          map((isValid) => !isValid ? null : { duplicateUser: true, })
+        )
+      )
+    );
+  };
 }
