@@ -10,6 +10,7 @@ import {
 @Component({
   selector: "app-dynamic-container",
   template: `
+    <h1 class="text-2xl font-bold mb-4">Creating dynamic components with ComponentFactoryResolver</h1>
     <button nz-button nzType="primary" class="mr-4" (click)="addDynamicOne()">add dynamic component 1</button>
     <button nz-button nzType="primary" class="mr-4" (click)="addDynamicTwo()">add dynamic component 2</button>
     <button nz-button nzType="primary" class="mr-4" (click)="clearDynamic()">Clear dynamic components</button>
