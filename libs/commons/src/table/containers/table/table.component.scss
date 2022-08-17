@@ -1,0 +1,9 @@
+.wrapper-common-table {
+  @apply border border-gray-300 border-collapse w-full;
+  &__header {
+    &__item {
+      @apply border border-gray-300;
+      @apply py-2 px-4;
+    }
+  }
+}

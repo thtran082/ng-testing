@@ -1,4 +1,4 @@
-import { Component, ContentChild, Input, TemplateRef } from "@angular/core";
+import { ChangeDetectionStrategy, Component, ContentChild, Input, TemplateRef } from "@angular/core";
 import { CommonListItemDirective } from "../../directives";
 
 @Component({
@@ -10,7 +10,8 @@ import { CommonListItemDirective } from "../../directives";
       </div>
     </div>
   `,
-  styleUrls: ["./list.component.scss"]
+  styleUrls: ["./list.component.scss"],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CommonListComponent<T> {
   @Input() data: T[] = [];

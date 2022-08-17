@@ -7,6 +7,7 @@ import { NzButtonModule } from "ng-zorro-antd/button";
 import { ContentOneComponent } from "./content-one/content-one.component";
 import { ContentTwoComponent } from "./content-two/content-two.component";
 import { ExampleListModule } from "@examples";
+import { ExampleTableModule } from "@examples";
 
 
 @NgModule({
@@ -17,7 +18,7 @@ import { ExampleListModule } from "@examples";
     ContentTwoComponent,
   ],
   imports: [
-    CommonModule, LessonDynamicRoutingModule, NzButtonModule, ExampleListModule,
+    CommonModule, LessonDynamicRoutingModule, NzButtonModule, ExampleListModule, ExampleTableModule,
   ]
 })
 export class LessonDynamicComponentsModule {

@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { ChangeDetectionStrategy, Component } from "@angular/core";
 import { ICommonCodeFile } from "@common";
 
 @Component({
@@ -14,7 +14,8 @@ import { ICommonCodeFile } from "@common";
         </ng-template>
       </lib-common-list>
     </lib-common-code>
-  `
+  `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ExamplesListComponent {
   readonly data = ['component A', 'component B', 'component C'];

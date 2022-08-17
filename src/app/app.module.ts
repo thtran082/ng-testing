@@ -22,7 +22,6 @@ registerLocaleData(en);
       provide: HIGHLIGHT_OPTIONS,
       useValue: <HighlightOptions>{
         fullLibraryLoader: () => import("highlight.js"),
-        lineNumbersLoader: () => import("highlightjs-line-numbers.js"),
       }
     }
   ],
