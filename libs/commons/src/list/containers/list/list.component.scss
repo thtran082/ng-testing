@@ -1,0 +1,8 @@
+.wrapper-common-list {
+  &__item {
+    @apply border-b border-solid border-gray-300 p-2;
+    &:nth-child(odd) {
+      @apply bg-gray-200;
+    }
+  }
+}

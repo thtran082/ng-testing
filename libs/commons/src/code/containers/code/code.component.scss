@@ -1,0 +1,16 @@
+.wrapper-common-code {
+  @apply border-2 border-solid border-gray-700 font-mono rounded-md;
+  &__navigator {
+    @apply flex flex-row border-b-2 border-solid border-gray-700;
+    &__item {
+      @apply py-4 px-8;
+      &.active {
+        @apply text-red-400 font-semibold;
+      }
+    }
+  }
+
+  &__container {
+
+  }
+}
