@@ -1,7 +1,7 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
-  "newProjectRoot": "projects",
+  "newProjectRoot": "libs",
   "projects": {
     "ng-testing": {
       "projectType": "application",
@@ -132,6 +132,68 @@
               "node_modules/ng-zorro-antd/ng-zorro-antd.min.css"
             ],
             "scripts": []
+          }
+        }
+      }
+    },
+    "commons": {
+      "projectType": "library",
+      "root": "libs/commons",
+      "sourceRoot": "libs/commons/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "libs/commons/ng-package.json",
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/commons/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "libs/commons/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/commons/src/test.ts",
+            "tsConfig": "libs/commons/tsconfig.spec.json",
+            "karmaConfig": "libs/commons/karma.conf.js"
+          }
+        }
+      }
+    },
+    "examples": {
+      "projectType": "library",
+      "root": "libs/examples",
+      "sourceRoot": "libs/examples/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "libs/examples/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/examples/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "libs/examples/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/examples/src/test.ts",
+            "tsConfig": "libs/examples/tsconfig.spec.json",
+            "karmaConfig": "libs/examples/karma.conf.js"
           }
         }
       }

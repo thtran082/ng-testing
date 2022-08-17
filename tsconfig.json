@@ -23,7 +23,15 @@
       "dom"
     ],
     "paths": {
-      "@ng-testing/services": ["./src/app/services"],
+      "@ng-testing/services": [
+        "./src/app/services"
+      ],
+      "@common": [
+        "./libs/commons/src/index"
+      ],
+      "@examples": [
+        "./libs/examples/src/index",
+      ]
     }
   },
   "angularCompilerOptions": {

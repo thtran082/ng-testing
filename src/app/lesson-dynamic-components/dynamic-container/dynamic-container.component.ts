@@ -14,7 +14,6 @@ import {
     <button nz-button nzType="primary" class="mr-4" (click)="addDynamicOne()">add dynamic component 1</button>
     <button nz-button nzType="primary" class="mr-4" (click)="addDynamicTwo()">add dynamic component 2</button>
     <button nz-button nzType="primary" class="mr-4" (click)="clearDynamic()">Clear dynamic components</button>
-
     <div #dynamicComponent></div>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
