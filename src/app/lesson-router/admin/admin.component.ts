@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { AuthService } from "../auth/auth.service";
-import { AbstractControl, FormBuilder, ValidationErrors, ValidatorFn, Validators } from "@angular/forms";
+import { AbstractControl, UntypedFormBuilder, ValidationErrors, ValidatorFn, Validators } from "@angular/forms";
 import { ActivatedRoute } from "@angular/router";
 import { FormSafeData } from "../guard/form-safe-data";
 import { ApiService } from "@ng-testing/services";
@@ -43,7 +43,7 @@ export class AdminComponent implements OnInit, FormSafeData {
 
   constructor(
     private authService: AuthService,
-    private _fb: FormBuilder,
+    private _fb: UntypedFormBuilder,
     private route: ActivatedRoute,
     private api: ApiService
   ) {
