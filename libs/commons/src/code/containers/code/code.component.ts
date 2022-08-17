@@ -6,12 +6,17 @@ import { ICommonCodeFile } from "../../interfaces";
   template: `
     <div class="wrapper-common-code">
       <div class="wrapper-common-code__navigator">
-        <div (click)="activeTab = 'Preview'" class="wrapper-common-code__navigator__item" [class.active]="activeTab === 'Preview'">
+        <a (click)="activeTab = 'Preview'"
+             class="wrapper-common-code__navigator__item"
+             [class.active]="activeTab === 'Preview'">
           Preview
-        </div>
-        <div *ngFor="let file of files" class="wrapper-common-code__navigator__item">
+        </a>
+        <a *ngFor="let file of files"
+             (click)="activeTab = file.title"
+             class="wrapper-common-code__navigator__item"
+             [class.active]="activeTab === file.title">
           {{ file.title }}
-        </div>
+        </a>
       </div>
       <div class="wrapper-common-code__container">
         <ng-container *ngIf="activeTab === 'Preview'; else codeTemplate">
@@ -21,7 +26,9 @@ import { ICommonCodeFile } from "../../interfaces";
     </div>
 
     <ng-template #codeTemplate>
-
+      <pre class="wrapper-common-code__container__pre">
+        <code [highlight]="code" [languages]="languages" [lineNumbers]="true"></code>
+      </pre>
     </ng-template>
   `,
   styleUrls: [`./code.component.scss`]
@@ -29,8 +36,12 @@ import { ICommonCodeFile } from "../../interfaces";
 export class CommonsCodeComponent {
   @Input() files: ICommonCodeFile[] = [];
 
-  activeTab: string = 'Preview';
-  languages: string[] = [];
+  public get code() {
+    return this.files.find(i => i.title === this.activeTab)!.code;
+  }
+
+  activeTab: string = "Preview";
+  languages: string[] = ['typescript'];
 
 
 }

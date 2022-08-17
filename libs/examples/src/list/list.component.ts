@@ -21,7 +21,7 @@ export class ExamplesListComponent {
 
   files: ICommonCodeFile[] = [{
     title: 'Typescript',
-    languages: [''],
+    languages: ['ts'],
     code: `
       import { Component } from "@angular/core";
       import { ICommonCodeFile } from "@common";

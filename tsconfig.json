@@ -30,7 +30,7 @@
         "./libs/commons/src/index"
       ],
       "@examples": [
-        "./libs/examples/src/index",
+        "./libs/examples/src/index"
       ]
     }
   },

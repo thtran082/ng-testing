@@ -11,6 +11,8 @@
   }
 
   &__container {
-
+    &__pre {
+      @apply flex flex-col;
+    }
   }
 }
