@@ -2,4 +2,4 @@
 
 `this project is a combination of features demo`
 
-test rebase 2
+test rebase 3
