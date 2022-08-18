@@ -28,13 +28,13 @@ export class MainComponent implements OnInit {
 
   ngDoCheck() {
     this.renderService.addDoCheckRender(this.constructor.name);
-    console.log(
-      '%c' + this.constructor.name + ': ngDoCheck',
-      'border: 1px solid violet'
-    );
-    if (this.length!== this.value.length) {
-      this.cdr.markForCheck();
-    } 
+    // console.log(
+    //   '%c' + this.constructor.name + ': ngDoCheck',
+    //   'border: 1px solid violet'
+    // );
+    // if (this.length!== this.value.length) {
+    //   this.cdr.markForCheck();
+    // }
   }
 
   ngOnChanges() {
