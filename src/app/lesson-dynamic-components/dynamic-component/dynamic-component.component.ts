@@ -1,9 +1,18 @@
-import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnInit,
+  ViewEncapsulation,
+} from '@angular/core';
+import { finalize, interval, tap } from 'rxjs';
 
 @Component({
-  selector: "app-dynamic-component",
+  selector: 'app-dynamic-component',
   template: `
     <div class="flex flex-row gap-8 justify-around">
+      <div>
+        {{ vm$ | async }}
+      </div>
       <div class="flex-1">
         <app-dynamic-container></app-dynamic-container>
       </div>
@@ -16,11 +25,9 @@ import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DynamicComponentComponent implements OnInit {
+  readonly vm$ = interval(1000).pipe(tap(console.log));
 
-  constructor() {
-  }
+  constructor() {}
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

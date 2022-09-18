@@ -55,6 +55,7 @@ export class CommonTableComponent<T extends Record<string, any> = Record<string,
 
   @ContentChildren(CommonTableBodyDirective)
   set body(bodies: QueryList<CommonTableBodyDirective<keyof T>>) {
+    Array.isArray([])
     bodies.forEach(body => {
       this.bodyTemplate[body.key as keyof T] = body.template;
     })
