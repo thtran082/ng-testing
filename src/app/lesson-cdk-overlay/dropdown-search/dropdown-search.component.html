@@ -1,0 +1,32 @@
+<form
+  #form="ngForm"
+  [class.drop-down-input-active]="showPanel$ | async"
+  class="drop-down-input"
+  nz-form>
+  <nz-form-item class="drop-down-input-item">
+    <nz-form-control #originOverlay="cdkOverlayOrigin" cdkOverlayOrigin nzSpan="16">
+      <input
+        [(ngModel)]="searchKey"
+        autocomplete="off"
+        name="searchKey"
+        nz-input
+        placeholder="write something into here..."
+        type="text"
+        class="input">
+    </nz-form-control>
+  </nz-form-item>
+</form>
+
+<ng-template
+  [cdkConnectedOverlayOpen]="!!(showPanel$ | async)"
+  [cdkConnectedOverlayOrigin]="originOverlay"
+  cdkConnectedOverlay
+>
+  <div class="overlay">
+    <ul *ngFor="let item of data$ | async" class="list">
+      <li class="list-item">
+        <span class="list-item-content" (click)="onSelectSuggestion(item)">{{item}}</span>
+      </li>
+    </ul>
+  </div>
+</ng-template>

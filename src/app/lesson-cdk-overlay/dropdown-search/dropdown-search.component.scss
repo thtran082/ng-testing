@@ -1,0 +1,61 @@
+$input-width: 400px;
+
+:host {
+  display: block;
+}
+
+.drop-down-input {
+  width: $input-width;
+  position: absolute;
+  z-index: 100;
+
+  &-item, nz-form-control {
+    width: 100%;
+    min-width: 100%;
+    max-width: 100%;
+  }
+
+  .input {
+    outline: none !important;
+    border: none;
+
+    &:hover {
+      box-shadow: 0 1px 6px rgb(32 33 36 / 28%);
+    }
+
+    &:focus {
+      border-radius: 0.5rem 0.5rem 0 0;
+      box-shadow: 0 1px 6px rgb(32 33 36 / 28%);
+
+      &:not(:placeholder-shown) {
+        box-shadow: 0 -3px 6px rgb(32 33 36 / 28%);
+      }
+    }
+  }
+}
+
+.drop-down-input-active {
+  z-index: 100000;
+}
+
+.overlay {
+  width: $input-width;
+  background: white;
+  padding: 0.5rem;
+  border-radius: 0 0 0.5rem 0.5rem;
+  box-shadow: 0 4px 6px rgb(32 33 36 / 28%);
+  .list {
+    &:not(:last-child) {
+      & .list-item {
+      border-bottom: 1px solid rgba(0,0,0, 0.05);
+      }
+    }
+    &-item {
+      padding: 0.25rem;
+      cursor: pointer;
+      &:hover {
+        background: rgba(0,0,0, 0.02);
+      }
+    }
+  }
+}

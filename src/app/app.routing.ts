@@ -1,7 +1,7 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 
-const routes: Routes = [
+export const routes: Routes = [
   {
     path: "change-detection",
     loadChildren: () => import("./lesson-change-detection/change-detection.module").then(m => m.ChangeDetectionModule),
@@ -17,6 +17,10 @@ const routes: Routes = [
   {
     path: "dynamic-component",
     loadChildren: () => import("./lesson-dynamic-components/lesson-dynamic-components.module").then(m => m.LessonDynamicComponentsModule),
+  },
+  {
+    path: "dropdown-search",
+    loadChildren: () => import("./lesson-cdk-overlay/cdk-overlay.module").then(m => m.LessonCdkOverlayModule),
   },
 ];
 

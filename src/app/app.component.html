@@ -1,23 +1,8 @@
 <div class=" h-screen bg-slate-100">
   <ul class="w-full px-8 py-4 bg-blue-300 flex gap-6">
-    <li>
-      <a class="px-4 py-4" routerLink="/change-detection" routerLinkActive="bg-blue-500 font-bold text-white">
-        Change Detection
-      </a>
-    </li>
-    <li>
-      <a class="px-4 py-4" routerLink="/lesson-router" routerLinkActive="bg-blue-500 font-bold text-white">
-        Router Demo
-      </a>
-    </li>
-    <li>
-      <a class="px-4 py-4" routerLink="/custom-directive" routerLinkActive="bg-blue-500 font-bold text-white">
-        Custom Directive
-      </a>
-    </li>
-    <li>
-      <a class="px-4 py-4" routerLink="/dynamic-component" routerLinkActive="bg-blue-500 font-bold text-white">
-        Dynamic components
+    <li *ngFor="let item of routes">
+      <a class="px-4 py-4" [routerLink]="'/' + item.path" routerLinkActive="bg-blue-500 font-bold text-white">
+        {{ item.path }}
       </a>
     </li>
   </ul>

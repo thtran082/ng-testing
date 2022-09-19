@@ -28,6 +28,18 @@ import { RenderService } from '../services/render.service';
     `
       p {
         margin-bottom: 1rem !important;
+        border: 1px solid #98f2f5;
+        border-radius: 10px;
+        background-color: #d1f2f3;
+
+        text-align: center;
+        width: 200px;
+        margin-inline: auto;
+
+        &.highlight {
+          // background: #bada55;
+          animation: blink 1s;
+        }
       }
     `,
   ],
