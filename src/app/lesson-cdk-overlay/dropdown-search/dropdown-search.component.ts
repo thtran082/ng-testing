@@ -1,5 +1,9 @@
+import { FocusMonitor } from "@angular/cdk/a11y";
+import { CdkConnectedOverlay } from "@angular/cdk/overlay";
 import { Component, ElementRef, ViewChild, ViewEncapsulation } from "@angular/core";
 import { NgForm } from "@angular/forms";
+import { ApiService } from "@ng-testing/services";
+import { NzInputDirective } from "ng-zorro-antd/input";
 import {
   BehaviorSubject,
   combineLatest, delay,
@@ -13,10 +17,6 @@ import {
   switchMap,
   tap
 } from "rxjs";
-import { CdkConnectedOverlay } from "@angular/cdk/overlay";
-import { FocusMonitor } from "@angular/cdk/a11y";
-import { NzInputDirective } from "ng-zorro-antd/input";
-import { ApiService } from "@ng-testing/services";
 
 @Component({
   selector: "app-dropdown-search",
@@ -41,6 +41,9 @@ export class DropdownSearchComponent {
   }
 
   ngOnInit(): void {
+    this.form.valueChanges!.pipe(
+      tap(console.log),
+    ).subscribe();
     this.isPanelVisible$ = combineLatest([
       this.form.valueChanges!.pipe(
         filter(val => !!val.searchKey || !!this.searchKey),
@@ -62,13 +65,13 @@ export class DropdownSearchComponent {
     this.isPanelVisible$
       .pipe(
         tap(() => this.loading$.next(true)),
-        switchMap((isVisibled) => {
-          if (!isVisibled) return of(isVisibled);
+        switchMap((visible) => {
+          if (!visible) return of(visible);
           return this.api.getUsers().pipe(
             map((val) => {
               val = val.map(item => item.name);
               this.data$.next(val);
-              return of(isVisibled);
+              return of(visible);
             }),
             finalize(() => this.loading$.next(false)),
           );
